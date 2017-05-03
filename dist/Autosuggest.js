@@ -713,7 +713,7 @@ var _initialiseProps = function _initialiseProps() {
         return;
       }
 
-      if (node.getAttribute('data.suggestion-ignore') !== null) {
+      if (node.getAttribute('data-suggestion-ignore') !== null) {
         _this3.justClickedOnIgnored = true;
       }
 

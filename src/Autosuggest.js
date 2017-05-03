@@ -252,7 +252,7 @@ export default class Autosuggest extends Component {
         return;
       }
 
-      if (node.getAttribute('data.suggestion-ignore') !== null) {
+      if (node.getAttribute('data-suggestion-ignore') !== null) {
         this.justClickedOnIgnored = true;
       }
 
