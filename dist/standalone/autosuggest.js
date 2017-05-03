@@ -512,11 +512,11 @@
                       if (_this2.justClickedOnSuggestionsContainer) {
                         _this2.input.focus();
                         if (_this2.justClickedOnIgnored) {
+                          _this2.justClickedOnSuggestionsContainer = false;
+                          _this2.justClickedOnIgnored = false;
                           setTimeout(function() {
-                            _this2.justClickedOnSuggestionsContainer = false;
-                            _this2.justClickedOnIgnored = false;
                             _this2.input.blur();
-                          });
+                          }, 500);
                         }
                         return;
                       }

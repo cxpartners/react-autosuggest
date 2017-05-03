@@ -479,11 +479,11 @@ export default class Autosuggest extends Component {
         if (this.justClickedOnSuggestionsContainer) {
           this.input.focus();
           if (this.justClickedOnIgnored) {
+            this.justClickedOnSuggestionsContainer = false;
+            this.justClickedOnIgnored = false;
             setTimeout(() => {
-              this.justClickedOnSuggestionsContainer = false;
-              this.justClickedOnIgnored = false;
               this.input.blur();
-            });
+            }, 500);
           }
           return;
         }
