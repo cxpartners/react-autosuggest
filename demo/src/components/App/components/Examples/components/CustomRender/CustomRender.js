@@ -24,8 +24,7 @@ const getSuggestions = value => {
   return people.filter(person => regex.test(getSuggestionValue(person)));
 };
 
-const getSuggestionValue = suggestion =>
-  `${suggestion.first} ${suggestion.last}`;
+const getSuggestionValue = suggestion => `${suggestion.first} ${suggestion.last}`;
 
 const renderSuggestion = (suggestion, { query }) => {
   const suggestionText = `${suggestion.first} ${suggestion.last}`;
