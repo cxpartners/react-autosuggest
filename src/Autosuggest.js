@@ -359,6 +359,7 @@ export default class Autosuggest extends Component {
     if (focusInputOnSuggestionClick === true) {
       this.input.focus();
     } else {
+      this.input.blur();
       this.onBlur();
     }
 
