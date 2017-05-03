@@ -418,6 +418,13 @@ var Autosuggest = (function(_Component) {
           onBlur: function onBlur(event) {
             if (_this2.justClickedOnSuggestionsContainer) {
               _this2.input.focus();
+              if (_this2.justClickedOnIgnored) {
+                setTimeout(function() {
+                  _this2.justClickedOnSuggestionsContainer = false;
+                  _this2.justClickedOnIgnored = false;
+                  _this2.input.blur();
+                });
+              }
               return;
             }
 
@@ -694,6 +701,7 @@ var _initialiseProps = function _initialiseProps() {
 
   this.onDocumentMouseDown = function(event) {
     _this3.justClickedOnSuggestionsContainer = false;
+    _this3.justClickedOnIgnored = false;
 
     var node =
       (event.detail && event.detail.target) || // This is for testing only. Please show me a better way to emulate this.
@@ -703,6 +711,10 @@ var _initialiseProps = function _initialiseProps() {
       if (node.getAttribute('data-suggestion-index') !== null) {
         // Suggestion was clicked
         return;
+      }
+
+      if (node.getAttribute('data.suggestion-ignore') !== null) {
+        _this3.justClickedOnIgnored = true;
       }
 
       if (node === _this3.suggestionsContainer) {
@@ -790,7 +802,6 @@ var _initialiseProps = function _initialiseProps() {
     if (focusInputOnSuggestionClick === true) {
       _this3.input.focus();
     } else {
-      _this3.input.blur();
       _this3.onBlur();
     }
 

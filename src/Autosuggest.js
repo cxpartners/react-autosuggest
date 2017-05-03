@@ -240,6 +240,7 @@ export default class Autosuggest extends Component {
 
   onDocumentMouseDown = event => {
     this.justClickedOnSuggestionsContainer = false;
+    this.justClickedOnIgnored = false;
 
     let node =
       (event.detail && event.detail.target) || // This is for testing only. Please show me a better way to emulate this.
@@ -249,6 +250,10 @@ export default class Autosuggest extends Component {
       if (node.getAttribute('data-suggestion-index') !== null) {
         // Suggestion was clicked
         return;
+      }
+
+      if (node.getAttribute('data.suggestion-ignore') !== null) {
+        this.justClickedOnIgnored = true;
       }
 
       if (node === this.suggestionsContainer) {
@@ -359,7 +364,6 @@ export default class Autosuggest extends Component {
     if (focusInputOnSuggestionClick === true) {
       this.input.focus();
     } else {
-      this.input.blur();
       this.onBlur();
     }
 
@@ -474,6 +478,13 @@ export default class Autosuggest extends Component {
       onBlur: event => {
         if (this.justClickedOnSuggestionsContainer) {
           this.input.focus();
+          if (this.justClickedOnIgnored) {
+            setTimeout(() => {
+              this.justClickedOnSuggestionsContainer = false;
+              this.justClickedOnIgnored = false;
+              this.input.blur();
+            });
+          }
           return;
         }
 
