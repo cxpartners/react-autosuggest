@@ -485,7 +485,9 @@ export default class Autosuggest extends Component {
             this.justClickedOnIgnored = false;
             setTimeout(() => {
               this.input.blur();
-              window.location = viewMoreUrl;
+              if (this.viewMoreUrl !== null) {
+                window.location = this.viewMoreUrl;
+              }
             }, 100);
           }
           return;
