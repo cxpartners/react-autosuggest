@@ -241,6 +241,7 @@ export default class Autosuggest extends Component {
   onDocumentMouseDown = event => {
     this.justClickedOnSuggestionsContainer = false;
     this.justClickedOnIgnored = false;
+    this.viewMoreUrl = null
 
     let node =
       (event.detail && event.detail.target) || // This is for testing only. Please show me a better way to emulate this.
@@ -253,6 +254,7 @@ export default class Autosuggest extends Component {
       }
 
       if (node.getAttribute('data-suggestion-ignore') !== null) {
+        this.viewMoreUrl = node.getAttribute('href');
         this.justClickedOnIgnored = true;
       }
 
@@ -483,7 +485,8 @@ export default class Autosuggest extends Component {
             this.justClickedOnIgnored = false;
             setTimeout(() => {
               this.input.blur();
-            }, 500);
+              window.location = viewMoreUrl;
+            }, 100);
           }
           return;
         }
