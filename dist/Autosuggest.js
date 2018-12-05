@@ -106,7 +106,8 @@ var defaultShouldRenderSuggestions = function defaultShouldRenderSuggestions(
 var defaultRenderSuggestionsContainer = function defaultRenderSuggestionsContainer(
   _ref
 ) {
-  var containerProps = _ref.containerProps, children = _ref.children;
+  var containerProps = _ref.containerProps,
+    children = _ref.children;
   return _react2.default.createElement('div', containerProps, children);
 };
 
@@ -211,10 +212,10 @@ var Autosuggest = (function(_Component) {
     {
       key: 'resetHighlightedSuggestion',
       value: function resetHighlightedSuggestion() {
-        var shouldResetValueBeforeUpDown = arguments.length > 0 &&
-          arguments[0] !== undefined
-          ? arguments[0]
-          : true;
+        var shouldResetValueBeforeUpDown =
+          arguments.length > 0 && arguments[0] !== undefined
+            ? arguments[0]
+            : true;
 
         this.setState(function(state) {
           var valueBeforeUpDown = state.valueBeforeUpDown;
@@ -301,9 +302,10 @@ var Autosuggest = (function(_Component) {
         );
 
         return {
-          sectionIndex: typeof sectionIndex === 'string'
-            ? parseInt(sectionIndex, 10)
-            : null,
+          sectionIndex:
+            typeof sectionIndex === 'string'
+              ? parseInt(sectionIndex, 10)
+              : null,
           suggestionIndex: parseInt(suggestionIndex, 10)
         };
       }
@@ -423,7 +425,10 @@ var Autosuggest = (function(_Component) {
                 _this2.justClickedOnIgnored = false;
                 setTimeout(function() {
                   _this2.input.blur();
-                }, 500);
+                  if (_this2.viewMoreUrl !== null) {
+                    window.location = _this2.viewMoreUrl;
+                  }
+                }, 100);
               }
               return;
             }
@@ -466,7 +471,7 @@ var Autosuggest = (function(_Component) {
                   }
                 } else if (suggestions.length > 0) {
                   var newHighlightedSectionIndex =
-                    data.newHighlightedSectionIndex,
+                      data.newHighlightedSectionIndex,
                     newHighlightedItemIndex = data.newHighlightedItemIndex;
 
                   var newValue = void 0;
@@ -475,9 +480,8 @@ var Autosuggest = (function(_Component) {
                     // valueBeforeUpDown can be null if, for example, user
                     // hovers on the first suggestion and then pressed Up.
                     // If that happens, use the original input value.
-                    newValue = valueBeforeUpDown === null
-                      ? value
-                      : valueBeforeUpDown;
+                    newValue =
+                      valueBeforeUpDown === null ? value : valueBeforeUpDown;
                   } else {
                     newValue = _this2.getSuggestionValueByIndex(
                       newHighlightedSectionIndex,
@@ -690,7 +694,7 @@ Autosuggest.defaultProps = {
   shouldRenderSuggestions: defaultShouldRenderSuggestions,
   alwaysRenderSuggestions: false,
   multiSection: false,
-  focusInputOnSuggestionClick: true,
+  focusInputOnSuggestionClick: false,
   highlightFirstSuggestion: false,
   theme: _theme.defaultTheme,
   id: '1'
@@ -702,6 +706,7 @@ var _initialiseProps = function _initialiseProps() {
   this.onDocumentMouseDown = function(event) {
     _this3.justClickedOnSuggestionsContainer = false;
     _this3.justClickedOnIgnored = false;
+    _this3.viewMoreUrl = null;
 
     var node =
       (event.detail && event.detail.target) || // This is for testing only. Please show me a better way to emulate this.
@@ -714,6 +719,7 @@ var _initialiseProps = function _initialiseProps() {
       }
 
       if (node.getAttribute('data-suggestion-ignore') !== null) {
+        _this3.viewMoreUrl = node.getAttribute('href');
         _this3.justClickedOnIgnored = true;
       }
 
@@ -734,7 +740,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onSuggestionMouseEnter = function(event, _ref3) {
-    var sectionIndex = _ref3.sectionIndex, itemIndex = _ref3.itemIndex;
+    var sectionIndex = _ref3.sectionIndex,
+      itemIndex = _ref3.itemIndex;
 
     _this3.updateHighlightedSuggestion(sectionIndex, itemIndex);
   };
@@ -776,8 +783,8 @@ var _initialiseProps = function _initialiseProps() {
       focusInputOnSuggestionClick = _props4.focusInputOnSuggestionClick;
 
     var _getSuggestionIndices = _this3.getSuggestionIndices(
-      _this3.findSuggestionElement(event.target)
-    ),
+        _this3.findSuggestionElement(event.target)
+      ),
       sectionIndex = _getSuggestionIndices.sectionIndex,
       suggestionIndex = _getSuggestionIndices.suggestionIndex;
 
@@ -814,7 +821,8 @@ var _initialiseProps = function _initialiseProps() {
     var _props5 = _this3.props,
       inputProps = _props5.inputProps,
       shouldRenderSuggestions = _props5.shouldRenderSuggestions;
-    var value = inputProps.value, onBlur = inputProps.onBlur;
+    var value = inputProps.value,
+      onBlur = inputProps.onBlur;
 
     var highlightedSuggestion = _this3.getHighlightedSuggestion();
     var shouldRender = shouldRenderSuggestions(value);
@@ -838,7 +846,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.itemProps = function(_ref4) {
-    var sectionIndex = _ref4.sectionIndex, itemIndex = _ref4.itemIndex;
+    var sectionIndex = _ref4.sectionIndex,
+      itemIndex = _ref4.itemIndex;
 
     return {
       'data-section-index': sectionIndex,
@@ -852,7 +861,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.renderSuggestionsContainer = function(_ref5) {
-    var containerProps = _ref5.containerProps, children = _ref5.children;
+    var containerProps = _ref5.containerProps,
+      children = _ref5.children;
     var renderSuggestionsContainer = _this3.props.renderSuggestionsContainer;
 
     return renderSuggestionsContainer({

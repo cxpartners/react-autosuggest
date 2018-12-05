@@ -231,9 +231,8 @@ export default class Autosuggest extends Component {
     );
 
     return {
-      sectionIndex: typeof sectionIndex === 'string'
-        ? parseInt(sectionIndex, 10)
-        : null,
+      sectionIndex:
+        typeof sectionIndex === 'string' ? parseInt(sectionIndex, 10) : null,
       suggestionIndex: parseInt(suggestionIndex, 10)
     };
   }
@@ -241,7 +240,7 @@ export default class Autosuggest extends Component {
   onDocumentMouseDown = event => {
     this.justClickedOnSuggestionsContainer = false;
     this.justClickedOnIgnored = false;
-    this.viewMoreUrl = null
+    this.viewMoreUrl = null;
 
     let node =
       (event.detail && event.detail.target) || // This is for testing only. Please show me a better way to emulate this.
@@ -540,9 +539,8 @@ export default class Autosuggest extends Component {
                 // valueBeforeUpDown can be null if, for example, user
                 // hovers on the first suggestion and then pressed Up.
                 // If that happens, use the original input value.
-                newValue = valueBeforeUpDown === null
-                  ? value
-                  : valueBeforeUpDown;
+                newValue =
+                  valueBeforeUpDown === null ? value : valueBeforeUpDown;
               } else {
                 newValue = this.getSuggestionValueByIndex(
                   newHighlightedSectionIndex,

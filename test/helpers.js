@@ -91,7 +91,13 @@ export const getSuggestion = suggestionIndex => {
   if (suggestionIndex >= suggestions.length) {
     throw Error(`
       Cannot find suggestion #${suggestionIndex}.
-      ${suggestions.length === 0 ? 'No suggestions found.' : `Only ${suggestions.length} suggestion${suggestions.length === 1 ? '' : 's'} found.`}
+      ${
+        suggestions.length === 0
+          ? 'No suggestions found.'
+          : `Only ${suggestions.length} suggestion${
+              suggestions.length === 1 ? '' : 's'
+            } found.`
+      }
     `);
   }
 
