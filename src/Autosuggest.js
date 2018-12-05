@@ -88,7 +88,7 @@ export default class Autosuggest extends Component {
     shouldRenderSuggestions: defaultShouldRenderSuggestions,
     alwaysRenderSuggestions: false,
     multiSection: false,
-    focusInputOnSuggestionClick: true,
+    focusInputOnSuggestionClick: false,
     highlightFirstSuggestion: false,
     theme: defaultTheme,
     id: '1'
